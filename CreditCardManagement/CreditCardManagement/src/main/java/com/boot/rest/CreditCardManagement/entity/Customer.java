@@ -1,43 +1,51 @@
 package com.boot.rest.CreditCardManagement.entity;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
-
+@Document
 public class Customer {
-
+    @Id
+    private long customerId=-1;
     private String first;
     private String last;
     private String gender;
     private String job;
     private Date dob;
-    @Id
-    @Field("customer_id")
-    private long customerId;
 
     @Override
     public String toString() {
         return "Customer{" +
-                "first='" + first + '\'' +
+                "customerId=" + customerId +
+                ", first='" + first + '\'' +
                 ", last='" + last + '\'' +
                 ", gender='" + gender + '\'' +
                 ", job='" + job + '\'' +
                 ", dob=" + dob +
-                ", customer_id=" + customerId +
                 '}';
     }
 
-    public Customer(String first, String last, String gender, String job, Date dob, long customerId) {
+    public Customer() {
+    }
+
+    public Customer(long customerId, String first, String last, String gender, String job, Date dob) {
+        this.customerId = customerId;
         this.first = first;
         this.last = last;
         this.gender = gender;
         this.job = job;
         this.dob = dob;
-        this.customerId = customerId;
     }
 
-    public Customer() {
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     public String getFirst() {
@@ -79,12 +87,8 @@ public class Customer {
     public void setDob(Date dob) {
         this.dob = dob;
     }
+//@Field("customer_id")
 
-    public long getCustomerId() {
-        return customerId;
-    }
 
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
-    }
+
 }

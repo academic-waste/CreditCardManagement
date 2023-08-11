@@ -1,10 +1,12 @@
 package com.boot.rest.CreditCardManagement.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 
-public class transaction {
+@Document
+public class Transaction {
     @Field("trans_date_trans_time")
     private Date transDateTransTime;
     private double amt;
@@ -21,6 +23,7 @@ public class transaction {
     private String first;
     private String last;
     private String gender;
+    @Field("Job")
     private String job;
     private Date dob;
 
@@ -44,10 +47,10 @@ public class transaction {
                 '}';
     }
 
-    public transaction() {
+    public Transaction() {
     }
 
-    public transaction(Date transDateTransTime, double amt, long transNum, long customerId, String city, String state, long cityPopulation, String merchant, String category, String first, String last, String gender, String job, Date dob) {
+    public Transaction(Date transDateTransTime, double amt, long transNum, long customerId, String city, String state, long cityPopulation, String merchant, String category, String first, String last, String gender, String job, Date dob) {
         this.transDateTransTime = transDateTransTime;
         this.amt = amt;
         this.transNum = transNum;

@@ -1,9 +1,7 @@
 package com.boot.rest.CreditCardManagement.entity;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 @Document
@@ -40,8 +38,8 @@ public class Customer {
         this.dob = dob;
     }
 
-    public long getCustomerId() {
-        return customerId;
+    public long getCustomerId(long customerId) {
+        return this.customerId;
     }
 
     public void setCustomerId(long customerId) {
@@ -80,8 +78,8 @@ public class Customer {
         this.job = job;
     }
 
-    public Date getDob() {
-        return dob;
+    public Date getDob(Date dob) {
+        return this.dob;
     }
 
     public void setDob(Date dob) {

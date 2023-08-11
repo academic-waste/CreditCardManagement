@@ -6,6 +6,7 @@ import com.boot.rest.CreditCardManagement.exception.RecordNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,5 +33,17 @@ public class CustomerService {
 
     public List<Customer> getAllCustomer(){
         return customerRepository.findAll();
+    }
+
+    public Customer insertCustomer(String first, String last, String gender, String job, Date dob){
+        Customer customer=new Customer();
+        customer.setJob(job);
+        customer.getDob(dob);
+        customer.setFirst(first);
+        customer.setLast(last);
+        customer.setGender(gender);
+
+        return customerRepository.insert(customer);
+
     }
 }

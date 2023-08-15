@@ -1,3 +1,4 @@
+com\boot\rest\CreditCardManagement\config\ThymeleafConfig.class
 com\boot\rest\CreditCardManagement\dao\CustomerRepository.class
 com\boot\rest\CreditCardManagement\service\ChatGPTService.class
 com\boot\rest\CreditCardManagement\exception\RecordNotFoundException.class

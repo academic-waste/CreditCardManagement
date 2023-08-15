@@ -8,6 +8,7 @@ public class WebController {
 
     @GetMapping("/chat")
     public String chatPage() {
-        return "forward:/chat.html";
+        //return "forward:/chat.html";
+        return "chat";
     }
 }

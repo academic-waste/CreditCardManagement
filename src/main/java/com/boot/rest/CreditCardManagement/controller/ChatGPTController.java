@@ -20,12 +20,14 @@ public class ChatGPTController {
 //    }
 
 
+
     @PostMapping("/api/chat")
     public String sendMessageToChatGPT(@RequestBody String message) {
-        String response = chatGPTService.getChatGPTResponse("Hello, ChatGPT");
+        String response = chatGPTService.getChatGPTResponse(message);
         System.out.println("ChatGPT Response: " + response);
         return response;
     }
+
 
 }
 

@@ -2,6 +2,7 @@ package com.boot.rest.CreditCardManagement.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -24,30 +25,34 @@ public class ChatGPTService {
             con.setRequestProperty("Content-Type", "application/json");
             con.setDoOutput(true);
 
-            String jsonInputString = "{ \"prompt\": \"" + message + "\", \"max_tokens\": 150 }";
+            // Use JSONObject to build the JSON string
+            JSONObject jsonInput = new JSONObject();
+            jsonInput.put("prompt", message);
+            jsonInput.put("max_tokens", 150);
+            String jsonInputString = jsonInput.toString();
 
-            try(OutputStream os = con.getOutputStream()) {
+            try (OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
 
             int responseCode = con.getResponseCode();
-            if(responseCode == HttpURLConnection.HTTP_OK) {
-                try(BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
                     StringBuilder response = new StringBuilder();
                     String responseLine = null;
                     while ((responseLine = br.readLine()) != null) {
                         response.append(responseLine.trim());
                     }
-                    return response.toString();
+
+                    JSONObject jsonResponse = new JSONObject(response.toString());
+                    return jsonResponse.getJSONArray("choices").getJSONObject(0).getString("text");
                 }
             }
         } catch (Exception e) {
             System.out.println("Error message: " + e.getMessage());
             e.printStackTrace();
-
         }
         return "Error: Unable to get response from ChatGPT.";
-
     }
 }

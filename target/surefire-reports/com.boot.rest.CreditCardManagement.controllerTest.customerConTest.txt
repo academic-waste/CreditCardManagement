@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.boot.rest.CreditCardManagement.controllerTest.customerConTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 41.131 s - in com.boot.rest.CreditCardManagement.controllerTest.customerConTest

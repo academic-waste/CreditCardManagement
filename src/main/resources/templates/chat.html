@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat with ChatGPT</title>
+</head>
+<body>
+
+<h2>Chat with ChatGPT</h2>
+
+<div id="chat-box" style="border: 1px solid black; height: 300px; overflow: auto; padding: 10px;"></div>
+
+<input type="text" id="user-input" placeholder="Type your message...">
+<button onclick="sendMessage()">Send</button>
+
+<script>
+    function sendMessage() {
+        var message = document.getElementById('user-input').value;
+        fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ prompt: message })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('chat-box').innerHTML += 'User: ' + message + '<br>';
+            document.getElementById('chat-box').innerHTML += 'ChatGPT: ' + data.choices[0].text + '<br>';
+            document.getElementById('user-input').value = '';
+        });
+    }
+</script>
+
+</body>
+</html>

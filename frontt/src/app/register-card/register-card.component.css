@@ -1,0 +1,48 @@
+/* [nz-form] {
+  max-width: 600px;
+}
+
+.phone-select {
+  width: 70px;
+}
+
+.register-are {
+  margin-bottom: 8px;
+}
+
+.customer-register {
+  margin-left: 50%;
+  margin-top: 100px;
+  transform: translate(-50%, 0);
+} */
+[nz-form] {
+  max-width: 600px;
+}
+
+.site-page-header {
+  width: 400px;
+  height: 20px;
+  margin: 30px auto;
+  text-align: center;
+}
+
+.register-are {
+  margin-bottom: 8px;
+}
+
+.customer-register {
+  margin-left: 50%;
+  margin-top: 50px;
+  transform: translate(-50%, 0);
+}
+
+.registerButton {
+  /* background-color: #4CAF50; */
+  /* background-color: cornflowerblue;
+  color: white; */
+  /* padding: 10px 20px; */
+  /* border: none;
+  border-radius: 5px;
+  cursor: pointer; */
+  margin-left: 8px;
+}

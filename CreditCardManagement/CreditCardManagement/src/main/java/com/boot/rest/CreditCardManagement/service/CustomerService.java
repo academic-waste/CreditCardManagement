@@ -17,7 +17,7 @@ public class CustomerService {
 
     public void deleteCustomerById(long cusId) throws RecordNotFoundException {
         //if(this.customerRepository.existsById(cusId))
-        if(this.customerRepository.findById(cusId) == null){
+        if(this.customerRepository.findById(cusId).isEmpty()){
             throw new RecordNotFoundException("customer with "+cusId+" does not exist");
         }else{
             System.out.println("customer: " + customerRepository.findById(cusId) + " deleted");

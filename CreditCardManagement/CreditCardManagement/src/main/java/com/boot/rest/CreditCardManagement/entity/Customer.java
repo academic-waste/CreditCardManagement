@@ -8,6 +8,7 @@ import java.util.Date;
 @Document
 public class Customer {
     @Id
+    private String id;
     private long customerId;
     private String first;
     private String last;
@@ -15,6 +16,7 @@ public class Customer {
     private String job;
     @JsonFormat(pattern="EEE MMM dd yyyy HH:mm:ss 'GMT'Z",timezone = "GMT+8")
     private Date dob;
+
 
     @Override
     public String toString() {
@@ -38,6 +40,14 @@ public class Customer {
         this.gender = gender;
         this.job = job;
         this.dob = dob;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public long getCustomerId() {

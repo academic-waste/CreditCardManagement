@@ -23,17 +23,10 @@ public class CustomerController {
     private CustomerRepository customerRepository;
 
     @PostMapping("/create")
-    public Customer createCustomer(@RequestParam String first, String last, String gender, String job, String dob) throws ParseException {
-        //String dobToString = dob.toString().substring(7,41);
-       // System.out.println(dobToString);
-      // Map entity=(Map)dob;
-      //  String dobToString =entity.get("dob").toString();
+    public Customer createCustomer(@RequestParam String first, String last, String gender, String job, String dob,long customerId) throws ParseException {
         SimpleDateFormat isoFormat = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss 'GMT'Z");
-       // Date date = simpleDateFormat.parse(dobToString);
-
-      //  isoFormat.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         Date date = isoFormat.parse(dob);
-        return customerService.insertCustomer(first, last, gender, job, date);
+        return customerService.insertCustomer(first, last, gender, job, date,customerId);
     }
 
     @DeleteMapping("/{cusId}")

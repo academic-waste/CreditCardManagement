@@ -25,7 +25,7 @@ public class CustomerService {
             this.customerRepository.deleteById(cusId);
         }
 
-    }
+    } 
 
     public Optional<Customer> findCustomerById(long cusId){
         return customerRepository.findById(cusId);
@@ -35,17 +35,14 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Customer insertCustomer(String first, String last, String gender, String job, Date dob){
+    public Customer insertCustomer(String first, String last, String gender, String job, Date dob,long customerId){
         Customer customer=new Customer();
-        customer.setJob(job);
-        customer.setDob(dob);
         customer.setFirst(first);
         customer.setLast(last);
         customer.setGender(gender);
-        long cusId01  =customerRepository.count();
-        customer.setCustomerId(cusId01);
-
-
+        customer.setJob(job);
+        customer.setDob(dob);
+        customer.setCustomerId(customerId);
         return customerRepository.insert(customer);
 
     }

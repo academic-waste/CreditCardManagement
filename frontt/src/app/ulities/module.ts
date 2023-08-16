@@ -36,14 +36,14 @@ export interface ColumnItem {
   // sortDirections: NzTableSortOrder[];
 }
 
-export interface stateSum {
+export interface StateSum {
   state: string;
-  total_transaction: number
+  total_transactions: number
 }
 
-export interface pieData {
-  name: string;
-  value: number
+export interface PieData {
+  name:string;
+  value:number
 }
 
 // 注销界面数据
@@ -54,4 +54,14 @@ export interface cacelData {
   gender: string;
   job: string;
   dob: string;
+}
+
+export interface LineData {
+  xAxis:string[];
+  yAxis:number[]
+}
+
+export interface StateCatgoryData{
+  category:string;
+  total_transactions:number
 }

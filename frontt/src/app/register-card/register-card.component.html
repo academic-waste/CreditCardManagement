@@ -2,15 +2,15 @@
 </nz-page-header>
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="customer-register">
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="firstName">First Name</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="first">First Name</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid!">
-      <input nz-input formControlName="firstName" id="firstName" />
+      <input nz-input formControlName="first" id="first" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="lastName">Last Name</nz-form-label>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="last">Last Name</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid!">
-      <input nz-input formControlName="lastName" id="lastName" />
+      <input nz-input formControlName="last" id="last" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>

@@ -63,10 +63,10 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     BrowserAnimationsModule,
     DemoNgZorroAntdModule,
     ReactiveFormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(DataService, { dataEncapsulation: false }),
+    // HttpClientInMemoryWebApiModule.forRoot(DataService, { dataEncapsulation: false }),
     NzTableModule, // 确保已添加 NzTableModule 到 imports 数组中
     NzMessageModule, // 添加 NzMessageModule 到 imports 数组中
-    HttpClientInMemoryWebApiModule.forRoot(CancelDataService) // 添加注销数据的这一行配置
+    // HttpClientInMemoryWebApiModule.forRoot(CancelDataService) // 添加注销数据的这一行配置
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { stateSum, TransactionsItem, TransactionsItemAll } from '../ulities/module'
+import { StateSum, TransactionsItem, TransactionsItemAll,StateCatgoryData } from '../ulities/module'
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { transition } from '@angular/animations';
 
@@ -14,14 +14,19 @@ import { transition } from '@angular/animations';
 
 //   constructor(private http: HttpClient) { }
 
-  // getSumDate(category:string){
-  //   switch(category){
-  //     case 'state'  :
-  //       return this.http.get<stateSum[]>(`${this.baseUrl}/transaction`)
-  //     case 'job'  :
-  //     /* 您可以有任意数量的 case 语句 */
-  //     default : /* 可选的 */
+  // getStateSumDate(category:string) : Observable<StateSum[]>{
+    //   switch(category){
+    //   case 'state'  :
+    //     return this.http.get<stateSum[]>(`${this.baseUrl}/transaction`)
+    //   case 'job'  :
+    //   /* 您可以有任意数量的 case 语句 */
+    //   default : /* 可选的 */
   // }
+          // return this.http.get<StateSum[]>(`${this.baseUrl}/transaction/analystByState`)
+  // }
+
+  // getStateCatData(stateName:string): Observable<StateCatgoryData[]>{
+  //   return this.http.get<StateCatgoryData[]>(`${this.baseUrl}/transaction/analysisByCategory`,{ params });
   // }
 
 //   getTransactions(): Observable<TransactionsItemAll[]> {

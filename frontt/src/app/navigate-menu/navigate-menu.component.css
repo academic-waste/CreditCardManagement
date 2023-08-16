@@ -1,0 +1,10 @@
+.header-menu {
+  /* background-color: blue; */
+  margin-top: 1%;
+  font-size: large;
+  text-align: center;
+}
+
+.header-menu li {
+  text-align: center;
+}

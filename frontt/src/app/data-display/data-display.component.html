@@ -1,0 +1,132 @@
+<!-- [nzLayout]="validateForm.get('formLayout')?.value" 
+初始值为字段名-->
+<!-- <nz-spin [nzSpinning]="loading" nzSize="large">
+  <ng-container *ngIf="!loading; else skeleton"> -->
+<form
+  nz-form
+  [nzLayout]="'horizontal'"
+  [formGroup]="validateForm"
+  (ngSubmit)="submitForm()"
+>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">Gender</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-radio-group formControlName="gender">
+        <label nz-radio-button [nzValue]="'M'">Man</label>
+        <label nz-radio-button [nzValue]="'F'">Female</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">Category</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Please enter a word or letter">
+      <input
+        nz-input
+        placeholder="Optional"
+        name="pattern"
+        pattern="^[A-Za-z]+$"
+        formControlName="category"
+      />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">Merchant</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Please enter a word or letter">
+      <input
+        nz-input
+        placeholder="Optional"
+        name="pattern"
+        pattern="^[A-Za-z]+$"
+        formControlName="merchant"
+      />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">City</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Please enter a word or letter">
+      <input
+        nz-input
+        placeholder="Optional"
+        name="pattern"
+        pattern="^[A-Za-z]+$"
+        formControlName="city"
+      />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">State</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Please enter a word or letter">
+      <input
+        nz-input
+        placeholder="Optional"
+        name="pattern"
+        pattern="^[A-Za-z]+$"
+        formControlName="state"
+      />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">Job</nz-form-label>
+    <nz-form-control [nzSpan]="8" nzErrorTip="Please enter a word or letter">
+      <input
+        nz-input
+        placeholder="Optional"
+        name="pattern"
+        pattern="^[A-Za-z]+$"
+        formControlName="job"
+      />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">amountt Level</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-radio-group formControlName="amt">
+        <label nz-radio-button [nzValue]="'1'">Low</label>
+        <label nz-radio-button [nzValue]="'2'">High</label>
+      </nz-radio-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzOffset]="5" [nzSpan]="12">
+      <button nz-button nzType="primary">Search</button>
+      <button nz-button nzType="primary" (click)="resetForm()">Reset</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<nz-divider></nz-divider>
+
+<nz-table
+  #sortTable
+  [nzData]="listOfData"
+  nzTableLayout="fixed"
+  [nzPageSize]="5"
+>
+  <thead>
+    <tr>
+      <th *ngFor="let column of listOfColumn">
+        {{ column.name }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of sortTable.data">
+      <td>{{ data.gender == "F" ? "Female" : "Male" }}</td>
+      <td>{{ data.category }}</td>
+      <td>{{ data.merchant }}</td>
+      <td>{{ data.city }}</td>
+      <td>{{ data.state }}</td>
+      <td>{{ data.cityPopulation }}</td>
+      <td>{{ data.job }}</td>
+      <td>{{ data.dob }}</td>
+      <td>{{ data.amt == 2 ? "High" : "low" }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<!-- </ng-container>
+</nz-spin> -->
+
+<!-- <ng-template #skeleton>
+  <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 10 }"></nz-skeleton>
+</ng-template> -->

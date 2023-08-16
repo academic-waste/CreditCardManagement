@@ -1,0 +1,13 @@
+/* .data-table {
+  text-align: center;
+  margin: 100px;
+} */
+
+[nz-form]:not(.ant-form-inline):not(.ant-form-vertical) {
+  /* max-width: 1000px; */
+  margin-top: 8px;
+}
+
+button {
+  margin-left: 8px;
+}

@@ -1,47 +1,31 @@
-import { Component } from '@angular/core';
-// import { NzDividerModule } from 'ng-zorro-antd/divider'; // 导入 NzDividerModule
+import { Component, OnInit } from '@angular/core';
+import { cacelData } from '../ulities/module'
+import { CancelDataService } from '../services/in-cacel-data.service';
 
+// 弹窗
+import { NzMessageService } from 'ng-zorro-antd/message';
 
-interface Person {
-  customerId: string;
-  fistName: string;
-  lastName: string;
-  gender: string;
-  job: string;
-  dob: string;
-}
 
 @Component({
   selector: 'app-cancel-card',
   templateUrl: './cancel-card.component.html',
   styleUrls: ['./cancel-card.component.css']
 })
-export class CancelCardComponent {
-  listOfData: Person[] = [
-    {
-      customerId: '1',
-      fistName: 'Amy',
-      lastName: 'Wang',
-      gender: 'Female',
-      job: 'Teacher',
-      dob: '1972-01-22'
-    },
-    {
-      customerId: '2',
-      fistName: 'Amy',
-      lastName: 'Wang',
-      gender: 'Female',
-      job: 'Teacher',
-      dob: '1972-01-22'
-    },
-    {
-      customerId: '3',
-      fistName: 'Amy',
-      lastName: 'Wang',
-      gender: 'Female',
-      job: 'Teacher',
-      dob: '1972-01-22'
-    }
-  ];
+export class CancelCardComponent implements OnInit {
+  listOfCustomerData: cacelData[] = [];
+  loading = true;
+  constructor(private cancelDataService: CancelDataService, private message: NzMessageService) { }
+
+  ngOnInit(): void {
+    this.listOfCustomerData = this.cancelDataService.createDb().listOfCustomerData;
+  }
+
+  deleteItem(id: number): void {
+    this.cancelDataService.deleteItem(id);
+    this.listOfCustomerData = this.cancelDataService.createDb().listOfCustomerData;
+    // console.log("Successfully cancel!")
+    this.message.success('Successfully cancel');
+  }
+
 }
 

@@ -1,4 +1,4 @@
-<nz-table #cancelTable [nzData]="listOfData">
+<nz-table #cancelTable [nzData]="listOfCustomerData" nzTableLayout="fixed" [nzPageSize]="10">
     <thead>
         <tr>
             <th>Customer Id</th>
@@ -19,7 +19,8 @@
             <td>{{ data.job }}</td>
             <td>{{ data.dob }}</td>
             <td>
-                <a>Cancel Card</a>
+                <button nz-button nzType="primary" [nzDanger]="true" (click)="deleteItem(data.customerId)">Cancel
+                    Card</button>
             </td>
         </tr>
     </tbody>

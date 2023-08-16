@@ -35,6 +35,10 @@ import { CancelCardComponent } from './cancel-card/cancel-card.component';
 // 导入英文语言包
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 
+// 注销模拟数据服务路径
+import { CancelDataService } from './services/in-cacel-data.service';
+
+
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -62,6 +66,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     HttpClientInMemoryWebApiModule.forRoot(DataService, { dataEncapsulation: false }),
     NzTableModule, // 确保已添加 NzTableModule 到 imports 数组中
     NzMessageModule, // 添加 NzMessageModule 到 imports 数组中
+    HttpClientInMemoryWebApiModule.forRoot(CancelDataService) // 添加注销数据的这一行配置
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

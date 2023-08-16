@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,7 +28,6 @@ import { DataDisplayComponent } from './data-display/data-display.component';
 import { NavigateMenuComponent } from './navigate-menu/navigate-menu.component';
 import { RegisterCardComponent } from './register-card/register-card.component';
 import { DataAnalysisComponent } from './data-analysis/data-analysis.component';
-import { DataService } from './services/in-transactions-data.service';
 import { CancelCardComponent } from './cancel-card/cancel-card.component';
 
 //nz-date-picker的部分locale 来自于 Angular 自身的国际化支持，需要引入相应的 Angular 语言包
@@ -63,10 +62,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     BrowserAnimationsModule,
     DemoNgZorroAntdModule,
     ReactiveFormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(DataService, { dataEncapsulation: false }),
     NzTableModule, // 确保已添加 NzTableModule 到 imports 数组中
     NzMessageModule, // 添加 NzMessageModule 到 imports 数组中
-    HttpClientInMemoryWebApiModule.forRoot(CancelDataService) // 添加注销数据的这一行配置
+    // HttpClientInMemoryWebApiModule.forRoot(CancelDataService) // 添加注销数据的这一行配置
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

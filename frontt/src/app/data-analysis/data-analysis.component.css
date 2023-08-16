@@ -11,11 +11,12 @@ nz-footer {
 nz-sider {
   background: #fff;
   color: #fff;
+ line-height: 100vh;
 }
 
 nz-layout nz-content {
-  background: #fff;
-  min-height: 100px;
+  background: #f0f2f5;
+  min-height: 100vh;
 }
 
 nz-layout {

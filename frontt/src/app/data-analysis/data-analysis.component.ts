@@ -32,14 +32,22 @@ export class DataAnalysisComponent implements OnInit {
   ]//实际调用api应该不需要这个
   private lineData: LineData = {xAxis:[],yAxis:[]};
   private pieData: PieData[] = [];
-  private categoryState: string='';
-  private tableName: string = 'State Total';
+  categoryState: string='';
+  tableName: string = 'State Total';
+  loading: boolean = false;
 
   //将得到的数据转换为pie的数据
   transResponseDataToPieData(responseData: StateSum[]) :void{
     this.pieData=[];
     responseData.forEach((item)=>{
       this.pieData.push({name: item.state, value:item.total_transactions})
+    })
+  }
+
+  transResponseDataToTableData(responseData: StateCatgoryData[]) :void{
+    this.pieData=[];
+    responseData.forEach((item)=>{
+      this.pieData.push({name: item.category, value:item.total_transactions})
     })
   }
 
@@ -52,44 +60,51 @@ export class DataAnalysisComponent implements OnInit {
     })
   }
 
-  getStateSum(choice: number, category: string){
+  getStateSum(category: string){
     //choice为0时是饼图，1是柱状图，只用这两种
     //两种情况：仅不同state的total，某个state下的spending category total
     console.log('hhh');
+    this.tableName = 'State Total';
     //调用api拿到数据，然后将拿到的数据作为参数传给updateCharts来更新，category，请求接口的类型
     // //if(!choice){
-    //   //还需要更新左边显示的数据
-    //   this.dataService.getStateSummDate(category).subscribe((response)=>{
-    //     this.transResponseDataToPieData(response);
-    //       this.updatePieCharts(response);
-    //       this.receiveSumData=this.pieData;
-    //     // 如果type是pie，直接用数据，但是要
-    //   },(err)=>{}
-    //   )
+      //还需要更新左边显示的数据
+      this.dataService.getStateSumDate(category).subscribe((response)=>{
+        console.log("jinruqingqiu");
+        
+        this.transResponseDataToPieData(response);
+          this.updatePieCharts(response);
+          this.receiveSumData=this.pieData;
+        // 如果type是pie，直接用数据，但是要
+      },(err)=>{}
+      )
     // //}else{
     //     //this.dataService.getStateCatData(this.categoryState).subscribe((response)=>{
     //       //this.transResponseDataToLineData(response);
     //       //this.updateCharts(reponse);
     //     //},(err)=>{})
     // //}
-    this.updatePieCharts(22)
+    // this.updatePieCharts(22)
   }
 
   getStateCatSum(){
-  //   this.dataService.getStateCatData(this.categoryState).subscribe((response)=>{
-  //         this.transResponseDataToLineData(response);
-  //         this.updateCharts(response);
-  //         this.transResponseDataToPieData(response);
-  //         this.receiveSumData=this.pieData;
-  //       },(err)=>{})
-  this.updateCharts(22)
+    if(!this.categoryState){
+      alert("Please choose state")
+    }else{
+      this.dataService.getStateCatData(this.categoryState).subscribe((response)=>{
+        this.transResponseDataToLineData(response);
+        this.updateCharts(response);
+        this.transResponseDataToTableData(response);
+        this.receiveSumData=this.pieData;
+        this.tableName = "Spending Category Total"
+      },(err)=>{})
+    }
+  // this.updateCharts(22)
   }
 
   //下拉框选州的时候更改this.categoryState
-  changeState(stateName: String): void{
-    // this.categoryState = stateName;
+  changeState(stateName: string): void{
+    this.categoryState = stateName;
     console.log("number", stateName);
-    
   }
 
 
@@ -99,22 +114,24 @@ export class DataAnalysisComponent implements OnInit {
     const lineChart = ec.init(document.getElementById('lineChart'));
 
     const lineChartOption = {
-
+      tooltip: {
+        trigger: 'item'
+      },
       xAxis: {
         type: 'category',
-        data: ['aa', 'bb', 'cc', 'dd', 'Fri', 'Sat', 'Sun'],
-        // data: this.lineData.xAxis,
+        // data: ['aa', 'bb', 'cc', 'dd', 'Fri', 'Sat', 'Sun'],
+        data: this.lineData.xAxis,
         axisLine: { show: false },
-        axisLabel: { show: true },
-        axisTick: { show: true },
-        splitLine: { show: true },
+        axisLabel: { show: false },
+        axisTick: { show: false },
+        splitLine: { show: false },
       },
       yAxis: {
         type: 'value'
       },
       series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        // data: this.lineData.yAxis,
+        // data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: this.lineData.yAxis,
         type: 'bar'
       }]
     }
@@ -129,55 +146,43 @@ export class DataAnalysisComponent implements OnInit {
       tooltip: {
         trigger: 'item'
       },
-      series: [{
-        data: this.receiveSumData,
-        // data: this.pieData,
-        type: 'pie'
-      }],
-      xAxis: {
-        type: 'category',
-        data: [],
-        axisLine: { show: false },
-        axisLabel: { show: false },
-        axisTick: { show: false },
-        splitLine: { show: false },
+      legend: {
+        data: ['Forest', 'Steppe', 'Desert', 'Wetland']
       },
+      series: [{
+        // data: this.receiveSumData,
+        data: this.pieData,
+        type: 'pie'
+      }]
     }
     lineChart.setOption(lineChartOption);
   }
 
    
   ngOnInit() {
-    console.log(this.receiveSumData);
-    this.initCharts();
-    this.transResponseDataToPieData([{state:"OK", total_transactions:100},{state:"dk", total_transactions:200}]);
-    console.log(this.pieData);
-    this.transResponseDataToLineData([{category:"OK", total_transactions:100},{category:"dk", total_transactions:200}])
-    console.log(this.lineData);
+    this.dataService.getStateSumDate('').subscribe((response)=>{
+      this.transResponseDataToPieData(response);
+        this.updatePieCharts(response);
+        this.receiveSumData=this.pieData;
+        this.initCharts()
+        console.log('aaa');
+    },(err)=>{})
   }
   initCharts() {
     const ec = echarts as any;
     const lineChart = ec.init(document.getElementById('lineChart'));
 
     const lineChartOption = {
-      legend: {
-        orient: 'vertical',
-        left: 'left'
-      },
-      xAxis: {
-        type: 'category',
-        data: ['Mon', '66', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      },
-      yAxis: {
-        type: 'value'
+      tooltip: {
+        trigger: 'item'
       },
       series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'bar'
-      }]
+        // data: this.receiveSumData,
+        data: this.pieData,
+        type: 'pie'
+      }],
     }
     lineChart.setOption(lineChartOption);
-
   }
   
 

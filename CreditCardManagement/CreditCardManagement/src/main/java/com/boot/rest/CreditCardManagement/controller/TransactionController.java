@@ -1,5 +1,7 @@
 package com.boot.rest.CreditCardManagement.controller;
 
+import com.boot.rest.CreditCardManagement.entity.CategoryTransactions;
+import com.boot.rest.CreditCardManagement.entity.StateTransactions;
 import com.boot.rest.CreditCardManagement.entity.Transaction;
 import com.boot.rest.CreditCardManagement.exception.RecordNotFoundException;
 import com.boot.rest.CreditCardManagement.service.CustomerService;
@@ -18,13 +20,33 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @GetMapping("/find")
-    public ResponseEntity<Object> getTransactionByFilters(@RequestParam String gender, @RequestParam String category, @RequestParam String merchant,
+    public List<Transaction> getTransactionByFilters(@RequestParam String gender, @RequestParam String category, @RequestParam String merchant,
                                                           @RequestParam String city, @RequestParam String state,
-                                                          @RequestParam long populationMin, @RequestParam long populationMax, @RequestParam double amtMin, @RequestParam double amtMax) throws RecordNotFoundException {
-        List<Transaction> transactionList = transactionService.getTransaction(gender, category,merchant, city, state, populationMin, populationMax, amtMin, amtMax);
+                                                          @RequestParam String job,  @RequestParam int amt) throws RecordNotFoundException {
+        List<Transaction> transactionList = transactionService.getTransaction(gender, category,merchant, city, state, job, amt);
         System.out.println(transactionList.size()+" files meet the requirements");
-        return ResponseEntity.status(HttpStatus.FOUND).body(transactionList);
+        return transactionList;
 
     }
+
+    @GetMapping("/analystByState")
+    public List<StateTransactions> getTransactionByStateAnalysis(){
+        List<StateTransactions> results = transactionService.getTransactionsForCountry();
+        return results;
+    }
+
+    @GetMapping("/analysisByCategory")
+    public List<CategoryTransactions> getTransactionByCategory(@RequestParam String state){
+        List<CategoryTransactions> results = transactionService.getTransactionsForCategory(state);
+        return results;
+    }
+
+//    @DeleteMapping
+//    public void deleteById(){
+//        for(long i=44; i<1008000; i+=8){
+//            transactionService.deleteById(i);
+//        }
+//
+//    }
 
 }

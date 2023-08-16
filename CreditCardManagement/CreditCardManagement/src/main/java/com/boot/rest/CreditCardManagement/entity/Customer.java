@@ -7,7 +7,7 @@ import java.util.Date;
 @Document
 public class Customer {
     @Id
-    private long customerId=-1;
+    private long customerId;
     private String first;
     private String last;
     private String gender;
@@ -38,7 +38,7 @@ public class Customer {
         this.dob = dob;
     }
 
-    public long getCustomerId(long customerId) {
+    public long getCustomerId() {
         return this.customerId;
     }
 

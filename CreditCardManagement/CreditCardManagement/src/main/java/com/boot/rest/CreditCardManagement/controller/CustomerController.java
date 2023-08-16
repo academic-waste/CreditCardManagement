@@ -23,15 +23,13 @@ public class CustomerController {
     private CustomerRepository customerRepository;
 
     @GetMapping("/create")
-    public Customer createCustomer(@RequestParam String first,String last,String gender,String job,String dob) throws ParseException {
+    public Customer createCustomer(@RequestParam String first, String last, String gender, String job, Date dob) throws ParseException {
 
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS+SS:SS");
-        Date date=simpleDateFormat.parse(dob);
-        return customerService.insertCustomer(first,last,gender,job,date);
+        return customerService.insertCustomer(first, last, gender, job, dob);
     }
 
     @DeleteMapping("/{cusId}")
-    public ResponseEntity<Object> deleteCustomerById(@PathVariable long cusId){
+    public ResponseEntity<Object> deleteCustomerById(@PathVariable long cusId) {
         Map<StatusMessages, String> map = new HashMap<>();
         try {
             this.customerService.deleteCustomerById(cusId);
@@ -44,13 +42,13 @@ public class CustomerController {
     }
 
     @GetMapping("/{cusId}")
-    public Optional<Customer> getCustomerById(@PathVariable long cusId){
+    public Optional<Customer> getCustomerById(@PathVariable long cusId) {
         System.out.println(customerService.findCustomerById(cusId));
         return this.customerService.findCustomerById(cusId);
     }
 
     @GetMapping
-    public List<Customer> getAllCustomer(){
+    public List<Customer> getAllCustomer() {
         return this.customerService.getAllCustomer();
     }
 }

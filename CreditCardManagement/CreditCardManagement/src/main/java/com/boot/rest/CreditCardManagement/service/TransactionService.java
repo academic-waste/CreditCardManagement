@@ -33,19 +33,19 @@ public class TransactionService {
             list.add(Criteria.where("gender").is(gender));
         }
         if(!(category.equals(" "))){
-            list.add(Criteria.where("category").regex(".*?" + category +".*"));
+            list.add(Criteria.where("category").regex(".*?" + category +".*").regex(category,"i"));
         }
         if(!(merchant.equals(" "))){
-            list.add(Criteria.where("merchant").regex(".*?" + merchant +".*"));
+            list.add(Criteria.where("merchant").regex(".*?" + merchant +".*").regex(merchant,"i"));
         }
         if(!(city.equals(" "))){
-            list.add(Criteria.where("city").regex(".*?" + city +".*"));
+            list.add(Criteria.where("city").regex(".*?" + city +".*").regex(city,"i"));
         }
         if(!(state.equals(" "))){
-            list.add(Criteria.where("state").regex(".*?" + state +".*"));
+            list.add(Criteria.where("state").regex(".*?" + state +".*").regex(state,"i"));
         }
         if(!(job.equals(" "))){
-            list.add(Criteria.where("Job").regex(".*?" + job +".*"));
+            list.add(Criteria.where("Job").regex(".*?" + job +".*").regex(job,"i"));
         }
         if(!(amt == -1)){
             if(amt == 1){
@@ -87,6 +87,10 @@ public class TransactionService {
         AggregationResults<CategoryTransactions> groupResults = mongoTemplate.aggregate(aggregation, "transaction", CategoryTransactions.class);
         List<CategoryTransactions> result = groupResults.getMappedResults();
         return result;
+    }
+
+    public List<Transaction> getAllTransaction(){
+        return transcationRepository.findAll();
     }
 
 

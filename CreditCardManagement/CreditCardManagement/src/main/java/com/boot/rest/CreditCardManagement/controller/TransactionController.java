@@ -20,7 +20,7 @@ public class TransactionController {
     private TransactionService transactionService;
 
     @GetMapping("/find")
-    public List<Transaction> getTransactionByFilters(@RequestParam String gender, @RequestParam String category, @RequestParam String merchant,
+    public List<Transaction> getTransactionSelectively(@RequestParam String gender, @RequestParam String category, @RequestParam String merchant,
                                                           @RequestParam String city, @RequestParam String state,
                                                           @RequestParam String job,  @RequestParam int amt) throws RecordNotFoundException {
         List<Transaction> transactionList = transactionService.getTransaction(gender, category,merchant, city, state, job, amt);
@@ -39,6 +39,11 @@ public class TransactionController {
     public List<CategoryTransactions> getTransactionByCategory(@RequestParam String state){
         List<CategoryTransactions> results = transactionService.getTransactionsForCategory(state);
         return results;
+    }
+
+    @GetMapping()
+    public List<Transaction> getAllTransactions(){
+        return transactionService.getAllTransaction();
     }
 
 //    @DeleteMapping

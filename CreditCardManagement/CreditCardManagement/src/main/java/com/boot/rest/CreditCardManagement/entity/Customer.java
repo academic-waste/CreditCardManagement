@@ -2,14 +2,16 @@ package com.boot.rest.CreditCardManagement.entity;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 @Document
 public class Customer {
-    @Id
-    private long customerId=-1;
+    @Field("customer_id")
+    private long customerId;
     private String first;
     private String last;
     private String gender;
@@ -31,6 +33,7 @@ public class Customer {
     public Customer() {
     }
 
+    @PersistenceConstructor
     public Customer(long customerId, String first, String last, String gender, String job, Date dob) {
         this.customerId = customerId;
         this.first = first;

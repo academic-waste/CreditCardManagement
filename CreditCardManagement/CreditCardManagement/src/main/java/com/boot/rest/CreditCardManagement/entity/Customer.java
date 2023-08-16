@@ -1,5 +1,6 @@
 package com.boot.rest.CreditCardManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,6 +13,7 @@ public class Customer {
     private String last;
     private String gender;
     private String job;
+    @JsonFormat(pattern="EEE MMM dd yyyy HH:mm:ss 'GMT'Z",timezone = "GMT+8")
     private Date dob;
 
     @Override

@@ -22,7 +22,7 @@ public class CustomerController {
     private CustomerService customerService;
     private CustomerRepository customerRepository;
 
-    @GetMapping("/create")
+    @PostMapping("/create")
     public Customer createCustomer(@RequestParam String first, String last, String gender, String job, String dob) throws ParseException {
         //String dobToString = dob.toString().substring(7,41);
        // System.out.println(dobToString);

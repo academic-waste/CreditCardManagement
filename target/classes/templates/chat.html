@@ -19,16 +19,23 @@
         fetch('/api/chat', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'text/plain' // Updated Content-Type
             },
-            body: JSON.stringify({ prompt: message })
+            body: message  // Sending message directly
         })
-        .then(response => response.json())
+        .then(response => response.text())  // Parsing response as text
         .then(data => {
-            document.getElementById('chat-box').innerHTML += 'User: ' + message + '<br>';
-            document.getElementById('chat-box').innerHTML += 'ChatGPT: ' + data.choices[0].text + '<br>';
+            appendMessage('User', message);
+            appendMessage('ChatGPT', data);
             document.getElementById('user-input').value = '';
         });
+    }
+
+    function appendMessage(sender, message) {
+        const chatBox = document.getElementById('chat-box');
+        const messageDiv = document.createElement('div');
+        messageDiv.innerHTML = `${sender}: ${message}`;
+        chatBox.appendChild(messageDiv);
     }
 </script>
 

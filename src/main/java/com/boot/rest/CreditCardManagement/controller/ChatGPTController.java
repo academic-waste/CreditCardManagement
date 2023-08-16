@@ -14,13 +14,6 @@ public class ChatGPTController {
     @Autowired
     private ChatGPTService chatGPTService;
 
-//    @PostMapping("/api/chat")
-//    public String sendMessageToChatGPT(@RequestBody String message) {
-//        return chatGPTService.getChatGPTResponse(message);
-//    }
-
-
-
     @PostMapping("/api/chat")
     public String sendMessageToChatGPT(@RequestBody String message) {
         String response = chatGPTService.getChatGPTResponse(message);

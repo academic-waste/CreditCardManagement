@@ -1,6 +1,5 @@
 package com.boot.rest.CreditCardManagement.controller;
 
-import com.boot.rest.CreditCardManagement.dao.CustomerRepository;
 import com.boot.rest.CreditCardManagement.entity.Customer;
 import com.boot.rest.CreditCardManagement.exception.RecordExistsException;
 import com.boot.rest.CreditCardManagement.exception.RecordNotFoundException;
@@ -16,12 +15,12 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/customer")
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
-    private CustomerRepository customerRepository;
 
     @PostMapping("/create")
     public ResponseEntity<Object> createCustomer(@RequestParam String first, String last, String gender, String job, String dob, long customerId) throws ParseException, RecordExistsException {
@@ -40,26 +39,37 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{cusId}")
-    public ResponseEntity<Object> deleteCustomerById(@PathVariable long cusId) {
+    public ResponseEntity<Object> deleteCustomerById(@PathVariable long cusId){
         Map<StatusMessages, String> map = new HashMap<>();
         try {
             this.customerService.deleteCustomerById(cusId);
             map.put(StatusMessages.SUCCESS, "Customer deleted successfully");
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(map);
-        } catch (RecordNotFoundException e) {
+        }catch (RecordNotFoundException e) {
             map.put(StatusMessages.FAILURE, e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(map);
         }
     }
 
-    @GetMapping("/{cusId}")
-    public Optional<Customer> getCustomerById(@PathVariable long cusId) {
-        System.out.println(customerService.findCustomerById(cusId));
-        return this.customerService.findCustomerById(cusId);
-    }
+//@DeleteMapping("/{cusId}")
+//public void deleteCustomerById(@PathVariable long cusId) throws RecordNotFoundException {
+//    this.customerService.deleteCustomerById(cusId);
+//}
 
-    @GetMapping
-    public List<Customer> getAllCustomer() {
-        return this.customerService.getAllCustomer();
-    }
+//    @DeleteMapping("/newDelete/{cussId}")
+//    public void delete(@PathVariable long cussId) throws RecordNotFoundException {
+//        this.customerService.deleteCustomer(cussId);
+//    }
+
+//    @GetMapping("/{cusId}")
+//    public Optional<Customer> getCustomerById(@PathVariable long cusId){
+//        System.out.println(customerService.findCustomerById(cusId));
+//        return this.customerService.findCustomerById(cusId);
+//    }
+
+//    @GetMapping
+//    public List<Customer> getAllCustomer(){
+//        return this.customerService.getAllCustomer();
+//    }
+
 }

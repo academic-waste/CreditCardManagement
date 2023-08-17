@@ -1,5 +1,6 @@
 package com.boot.rest.CreditCardManagement.entity;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -10,7 +11,7 @@ public class Transaction {
     @Field("trans_date_trans_time")
     private Date transDateTransTime;
     private double amt;
-    @Field("trans_num")
+    @Id
     private long transNum;
     @Field("customer_id")
     private long customerId;

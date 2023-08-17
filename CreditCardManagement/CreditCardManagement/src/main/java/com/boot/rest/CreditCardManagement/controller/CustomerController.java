@@ -24,12 +24,19 @@ public class CustomerController {
     private CustomerRepository customerRepository;
 
     @PostMapping("/create")
-    public Customer createCustomer(@RequestParam String first, String last, String gender, String job, String dob, long customerId) throws ParseException, RecordExistsException {
-
+    public ResponseEntity<Object> createCustomer(@RequestParam String first, String last, String gender, String job, String dob, long customerId) throws ParseException, RecordExistsException {
         SimpleDateFormat isoFormat = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss 'GMT'Z");
         Date date = isoFormat.parse(dob);
+        Map<StatusMessages, String> map = new HashMap<>();
+        try {
+            this.customerService.insertCustomer(first,last,gender,job,date,customerId);
+            map.put(StatusMessages.SUCCESS, "Customer inserted successfully");
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(map);
+        } catch (RecordExistsException e) {
+            map.put(StatusMessages.FAILURE, e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(map);
+        }
 
-        return customerService.insertCustomer(first, last, gender, job, date, customerId);
     }
 
     @DeleteMapping("/{cusId}")

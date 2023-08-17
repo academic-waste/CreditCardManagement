@@ -19,7 +19,7 @@ public class CustomerService {
 
     public void deleteCustomerById(long cusId) throws RecordNotFoundException {
         //if(this.customerRepository.existsById(cusId))
-        if (this.customerRepository.findById(cusId) == null) {
+        if (this.customerRepository.findById(cusId).isEmpty()) {
             throw new RecordNotFoundException("customer with " + cusId + " does not exist");
         } else {
             System.out.println("customer: " + customerRepository.findById(cusId) + " deleted");
@@ -36,8 +36,12 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
-    public Customer insertCustomer(String first, String last, String gender, String job, Date dob, long customerId){
+    public Customer insertCustomer(String first, String last, String gender, String job, Date dob, long customerId) throws RecordExistsException {
 
+        if (!this.customerRepository.findById(customerId).isEmpty()) {
+            throw new RecordExistsException("customer with " + customerId + " does exist");
+        } else {
+            System.out.println("customer: " + customerRepository.findById(customerId) + " inserted");
             Customer customer = new Customer();
             customer.setFirst(first);
             customer.setLast(last);
@@ -46,6 +50,8 @@ public class CustomerService {
             customer.setDob(dob);
             customer.setCustomerId(customerId);
             return customerRepository.insert(customer);
+        }
+
 
     }
 }

@@ -1,7 +1,7 @@
 <!-- [nzLayout]="validateForm.get('formLayout')?.value" 
 初始值为字段名-->
-<!-- <nz-spin [nzSpinning]="loading" nzSize="large">
-  <ng-container *ngIf="!loading; else skeleton"> -->
+<nz-spin [nzSpinning]="loading" nzSize="large">
+  <ng-container *ngIf="!loading; else skeleton">
 <form
   nz-form
   [nzLayout]="'horizontal'"
@@ -118,15 +118,15 @@
       <td>{{ data.state }}</td>
       <td>{{ data.cityPopulation }}</td>
       <td>{{ data.job }}</td>
-      <td>{{ data.dob }}</td>
-      <td>{{ data.amt == 2 ? "High" : "low" }}</td>
+      <td>{{ data.dob.slice(0,10) }}</td>
+      <td>{{ data.amt  }}</td>
     </tr>
   </tbody>
 </nz-table>
 
-<!-- </ng-container>
-</nz-spin> -->
+</ng-container>
+</nz-spin>
 
-<!-- <ng-template #skeleton>
+<ng-template #skeleton>
   <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 10 }"></nz-skeleton>
-</ng-template> -->
+</ng-template>

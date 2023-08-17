@@ -1,10 +1,12 @@
+<!-- <nz-spin [nzSpinning]="loading" nzSize="large">
+  <ng-container *ngIf="!loading; else skeleton"> -->
 <nz-layout>
   <nz-header>
     <button
       nz-button
       nzType="primary"
       nzGhost
-      (click)="getStateSum(0, 'state')"
+      (click)="getStateSum('state')"
     >
       State Transactions
     </button>
@@ -18,7 +20,8 @@
       [nzDropdownMenu]="menu"
       nzGhost
     >
-      Please chhoose state
+    {{ !categoryState ? "Please choose state" : categoryState}}
+      
       <span nz-icon nzType="down"></span>
     </button>
     <nz-dropdown-menu #menu="nzDropdownMenu">
@@ -26,17 +29,32 @@
         <li nz-menu-item (click)="changeState('OK')">
           <a>OK</a>
         </li>
-        <li nz-menu-item (click)="changeState('NH')">
-          <a>2nd item</a>
+        <li nz-menu-item (click)="changeState('NY')">
+          <a>NY</a>
         </li>
-        <li nz-menu-item (click)="changeState('bb')">
-          <a>3rd item</a>
+        <li nz-menu-item (click)="changeState('LA')">
+          <a>LA</a>
+        </li>
+        <li nz-menu-item (click)="changeState('CA')">
+          <a>CA</a>
+        </li>
+        <li nz-menu-item (click)="changeState('FL')">
+          <a>FL</a>
+        </li>
+        <li nz-menu-item (click)="changeState('PA')">
+          <a>PA</a>
+        </li>
+        <li nz-menu-item (click)="changeState('NC')">
+          <a>NC</a>
+        </li>
+        <li nz-menu-item (click)="changeState('GA')">
+          <a>GA</a>
         </li>
       </ul>
     </nz-dropdown-menu>
   </nz-header>
   <nz-layout>
-    <nz-sider>
+    <nz-sider [nzWidth]="500">
       <nz-table
         #basicTable
         [nzData]="receiveSumData"
@@ -45,7 +63,7 @@
         <thead>
           <tr style="text-align: center">
             {{
-              "xx Total"
+              tableName
             }}
           </tr>
         </thead>
@@ -61,3 +79,10 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
+
+<!-- </ng-container>
+</nz-spin>
+
+<ng-template #skeleton>
+  <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 10 }"></nz-skeleton>
+</ng-template> -->

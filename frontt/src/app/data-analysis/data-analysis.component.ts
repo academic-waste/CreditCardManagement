@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as echarts from 'echarts';
 import { DataService } from '../services/in-transactions-data.service';
 import { LineData, PieData, StateCatgoryData, StateSum } from '../ulities/module';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-data-analysis',
@@ -11,8 +12,25 @@ import { LineData, PieData, StateCatgoryData, StateSum } from '../ulities/module
 export class DataAnalysisComponent implements OnInit {
   //category是柱状图，state是饼图
 
-  constructor(private dataService: DataService) {}
-  receiveSumData : any[] = []//实际调用api应该不需要这个
+  constructor(private dataService: DataService, private http: HttpClient) {}
+  receiveSumData : any[] = [
+    {
+      value:14,
+      name:'hh'
+    },
+    {
+      value:19,
+      name:'hhh'
+    },
+    {
+      value:81,
+      name:'saahh'
+    },
+    {
+      value:11,
+      name:'hdadah'
+    }
+  ]//实际调用api应该不需要这个
   private lineData: LineData = {xAxis:[],yAxis:[]};
   private pieData: PieData[] = [];
   categoryState: string='';
@@ -78,8 +96,6 @@ export class DataAnalysisComponent implements OnInit {
         this.updateCharts(response);
         this.transResponseDataToTableData(response);
         this.receiveSumData=this.pieData;
-        console.log(this.pieData);
-        
         this.tableName = "Spending Category Total By State"
       },(err)=>{})
     }
@@ -211,6 +227,36 @@ export class DataAnalysisComponent implements OnInit {
     }
     lineChart.setOption(lineChartOption);
   }
-  
+
+  sendMessage() {
+    const message = (document.getElementById('user-input') as HTMLInputElement).value;
+    this.http.post('http://localhost:8080/api/chat', message, {
+        headers: { 'Content-Type': 'text/plain' },
+        responseType: 'text'
+    }).subscribe(data => {
+      this.appendMessage('User', message);
+      this.appendMessage('ChatGPT', data);
+      (document.getElementById('user-input') as HTMLInputElement).value = '';
+    });
+}
+
+
+ 
+  appendMessage(sender: string, message: string) {
+    const chatBox = document.getElementById('chat-box') as HTMLElement;
+    const messageDiv = document.createElement('div');
+    
+    if (sender === 'User') {
+        messageDiv.innerHTML = `${sender}: ${message}`;
+    } else if (sender === 'ChatGPT') {
+        messageDiv.style.fontWeight = 'bold';
+        messageDiv.innerHTML = `${sender}: ${message}`;
+    }
+    
+    chatBox.appendChild(messageDiv);
+}
+
 
 }
+
+

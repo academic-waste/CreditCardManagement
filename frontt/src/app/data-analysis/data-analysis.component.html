@@ -87,3 +87,12 @@
 <ng-template #skeleton>
   <nz-skeleton [nzActive]="true" [nzParagraph]="{ rows: 10 }"></nz-skeleton>
 </ng-template> -->
+
+<div class="chat-gpt">
+  <h2>Chat with ChatGPT</h2>
+  
+  <div id="chat-box" style="border: 1px solid black; height: 300px; overflow: auto; padding: 10px;"></div>
+  
+  <input type="text" id="user-input" placeholder="Type your message...">
+  <button (click)="sendMessage()">Send</button>
+</div>

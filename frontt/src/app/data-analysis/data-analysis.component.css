@@ -27,3 +27,62 @@ nz-layout nz-layout,
 nz-layout:last-child {
   margin: 20px;
 }
+
+/* Specific styles for the Chat with ChatGPT box */
+.chat-gpt {
+  padding: 20px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+
+#chat-box {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: black;
+  text-align: left;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+#user-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: black;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.chat-gpt button {
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-family: 'Arial', sans-serif;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+}
+
+.chat-gpt button:hover {
+  background: linear-gradient(90deg, #0062e6, #00b6ff);
+}
+
+.chat-gpt h2 {
+  font-family: 'Arial', sans-serif;  /* Consider using a Google Font for a more unique look */
+  font-size: 22px;
+  color: #ffffff;
+  background-color:  #0062e6;  /* A nice shade of blue */
+  padding: 10px 20px;
+  border-radius: 8px;  /* Rounded corners */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);  /* A subtle shadow */
+  margin-bottom: 20px;
+
+}

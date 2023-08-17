@@ -30,8 +30,12 @@ export class CancelCardComponent implements OnInit {
   deleteItem(id: number): void{
     this.cancelDataService.deleteItem(id).subscribe(() => {
       this.listOfCustomerData = this.listOfCustomerData.filter(listOfCustomerData => listOfCustomerData.id !== id);
-      this.message.success('Successfully cancel customer' + id);
+      this.message.success('Successfully cancelled customer ' + id);
     
+    });
+    this.cancelDataService.getItems().subscribe((data: any) => {
+      // this.cancelDataService.getItems = data;
+      this.listOfCustomerData = data;
     });
 
     // this.cancelDataService.deleteItem(id);

@@ -24,7 +24,7 @@
         nz-input
         placeholder="Optional"
         name="pattern"
-        pattern="^[A-Za-z]+$"
+        pattern="[^0-9]*"
         formControlName="category"
       />
     </nz-form-control>
@@ -36,7 +36,7 @@
         nz-input
         placeholder="Optional"
         name="pattern"
-        pattern="^[A-Za-z]+$"
+        pattern="[^0-9]*"
         formControlName="merchant"
       />
     </nz-form-control>
@@ -48,7 +48,7 @@
         nz-input
         placeholder="Optional"
         name="pattern"
-        pattern="^[A-Za-z]+$"
+        pattern="[^0-9]*"
         formControlName="city"
       />
     </nz-form-control>
@@ -60,7 +60,7 @@
         nz-input
         placeholder="Optional"
         name="pattern"
-        pattern="^[A-Za-z]+$"
+        pattern="^[^0-9]*"
         formControlName="state"
       />
     </nz-form-control>
@@ -72,13 +72,13 @@
         nz-input
         placeholder="Optional"
         name="pattern"
-        pattern="^[A-Za-z]+$"
+        pattern="[^0-9]*"
         formControlName="job"
       />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="4">amountt Level</nz-form-label>
+    <nz-form-label [nzSpan]="4">Amount Level</nz-form-label>
     <nz-form-control [nzSpan]="14">
       <nz-radio-group formControlName="amt">
         <label nz-radio-button [nzValue]="'1'">Low</label>

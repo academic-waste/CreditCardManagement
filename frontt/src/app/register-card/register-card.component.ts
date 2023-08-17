@@ -32,7 +32,7 @@ export class RegisterCardComponent implements OnInit {
     });
   }
 
-  cusId=1000;
+  cusId=982;
 
   // 提交表单数据
   submitForm(): void {

@@ -16,12 +16,12 @@
                 <td>{{ data.customerId }}</td>
                 <td>{{ data.first }}</td>
                 <td>{{ data.last }}</td>
-                <td>{{ data.gender }}</td>
+                <td>{{ data.gender == "F" ? "Female" : "Male" }}</td>
                 <td>{{ data.job }}</td>
                 <td>{{ data.dob | slice:0:15}}</td>
                 <td>
-                    <button nz-button nzType="primary" [nzDanger]="true" (click)="deleteItem(data.customerId)">Cancel
-                        Card</button>
+                    <button nz-button nzType="primary" [nzDanger]="true" (click)="deleteItem(data.customerId)">Delete
+        </button>
                 </td>
             </tr>
         </tbody>

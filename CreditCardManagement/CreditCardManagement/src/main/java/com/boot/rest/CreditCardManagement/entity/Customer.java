@@ -1,21 +1,23 @@
 package com.boot.rest.CreditCardManagement.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 @Document
 public class Customer {
     @Id
+    @Field("customer_id")
     private long customerId;
     private String first;
     private String last;
     private String gender;
     private String job;
-    @JsonFormat(pattern="EEE MMM dd yyyy HH:mm:ss 'GMT'Z",timezone = "GMT+8")
     private Date dob;
-
 
     @Override
     public String toString() {
@@ -32,6 +34,7 @@ public class Customer {
     public Customer() {
     }
 
+    @PersistenceConstructor
     public Customer(long customerId, String first, String last, String gender, String job, Date dob) {
         this.customerId = customerId;
         this.first = first;
@@ -41,9 +44,8 @@ public class Customer {
         this.dob = dob;
     }
 
-
     public long getCustomerId() {
-        return this.customerId;
+        return customerId;
     }
 
     public void setCustomerId(long customerId) {
@@ -82,8 +84,8 @@ public class Customer {
         this.job = job;
     }
 
-    public Date getDob(Date dob) {
-        return this.dob;
+    public Date getDob() {
+        return dob;
     }
 
     public void setDob(Date dob) {

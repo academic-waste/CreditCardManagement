@@ -8,7 +8,6 @@ import java.util.Date;
 @Document
 public class Customer {
     @Id
-    private String id;
     private long customerId;
     private String first;
     private String last;
@@ -42,13 +41,6 @@ public class Customer {
         this.dob = dob;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public long getCustomerId() {
         return this.customerId;

@@ -2,6 +2,7 @@ package com.boot.rest.CreditCardManagement.controller;
 
 import com.boot.rest.CreditCardManagement.dao.CustomerRepository;
 import com.boot.rest.CreditCardManagement.entity.Customer;
+import com.boot.rest.CreditCardManagement.exception.RecordExistsException;
 import com.boot.rest.CreditCardManagement.exception.RecordNotFoundException;
 import com.boot.rest.CreditCardManagement.service.CustomerService;
 import com.boot.rest.CreditCardManagement.util.StatusMessages;
@@ -23,10 +24,12 @@ public class CustomerController {
     private CustomerRepository customerRepository;
 
     @PostMapping("/create")
-    public Customer createCustomer(@RequestParam String first, String last, String gender, String job, String dob,long customerId) throws ParseException {
+    public Customer createCustomer(@RequestParam String first, String last, String gender, String job, String dob, long customerId) throws ParseException, RecordExistsException {
+
         SimpleDateFormat isoFormat = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss 'GMT'Z");
         Date date = isoFormat.parse(dob);
-        return customerService.insertCustomer(first, last, gender, job, date,customerId);
+
+        return customerService.insertCustomer(first, last, gender, job, date, customerId);
     }
 
     @DeleteMapping("/{cusId}")

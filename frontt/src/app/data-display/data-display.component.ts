@@ -193,7 +193,7 @@ export class DataDisplayComponent implements OnInit{
       // filterFn: (list: string[], item: TransactionsItem) => list.some(name => item.gender.indexOf(gender) !== -1)
     },
     {
-      name: 'category',
+      name: 'Category',
       // sortOrder: 'descend',
       // sortFn: (a: TransactionsItem, b: TransactionsItem) => a.age - b.age,
       // sortDirections: ['descend', null],
@@ -202,7 +202,7 @@ export class DataDisplayComponent implements OnInit{
       // filterMultiple: true
     },
     {
-      name: 'merchant',
+      name: 'Merchant',
       // sortOrder: null,
       // sortDirections: ['ascend', 'descend', null],
       // sortFn: (a: DataItem, b: DataItem) => a.address.length - b.address.length,
@@ -213,12 +213,12 @@ export class DataDisplayComponent implements OnInit{
       // ],
       // filterFn: (address: string, item: DataItem) => item.address.indexOf(address) !== -1
     },
-    {name: 'city'},
-    {name: 'state'},
-    {name: 'city population'},
-    {name: 'job'},
-    {name: 'dob'},
-    {name: 'amt'},
+    {name: 'City'},
+    {name: 'State'},
+    {name: 'City Population'},
+    {name: 'Job'},
+    {name: 'Dob'},
+    {name: 'Amount'},
     
   ];
 }

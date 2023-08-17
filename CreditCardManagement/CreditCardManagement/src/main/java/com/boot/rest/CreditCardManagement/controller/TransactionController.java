@@ -29,7 +29,7 @@ public class TransactionController {
 
     }
 
-    @GetMapping("/analystByState")
+    @GetMapping("/analysisByState")
     public List<StateTransactions> getTransactionByStateAnalysis(){
         List<StateTransactions> results = transactionService.getTransactionsForCountry();
         return results;

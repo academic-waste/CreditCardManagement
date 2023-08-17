@@ -21,23 +21,23 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-//    @DeleteMapping("/{cusId}")
-//    public ResponseEntity<Object> deleteCustomerById(@PathVariable long cusId){
-//        Map<StatusMessages, String> map = new HashMap<>();
-//        try {
-//            this.customerService.deleteCustomerById(cusId);
-//            map.put(StatusMessages.SUCCESS, "Customer deleted successfully");
-//            return ResponseEntity.status(HttpStatus.ACCEPTED).body(map);
-//        } catch (RecordNotFoundException e) {
-//            map.put(StatusMessages.FAILURE, e.getMessage());
-//            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(map);
-//        }
-//    }
-
-    @DeleteMapping("/newDelete/{cussId}")
-    public void delete(@PathVariable long cussId) throws RecordNotFoundException {
-        this.customerService.deleteCustomer(cussId);
+    @DeleteMapping("/{cusId}")
+    public ResponseEntity<Object> deleteCustomerById(@PathVariable long cusId){
+        Map<StatusMessages, String> map = new HashMap<>();
+        try {
+            this.customerService.deleteCustomerById(cusId);
+            map.put(StatusMessages.SUCCESS, "Customer deleted successfully");
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(map);
+        } catch (RecordNotFoundException e) {
+            map.put(StatusMessages.FAILURE, e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(map);
+        }
     }
+
+//    @DeleteMapping("/newDelete/{cussId}")
+//    public void delete(@PathVariable long cussId) throws RecordNotFoundException {
+//        this.customerService.deleteCustomer(cussId);
+//    }
 
 //    @GetMapping("/{cusId}")
 //    public Optional<Customer> getCustomerById(@PathVariable long cusId){
@@ -45,20 +45,9 @@ public class CustomerController {
 //        return this.customerService.findCustomerById(cusId);
 //    }
 
-    @DeleteMapping("/newDeleteByRepo/{cusId}")
-    public void deleteByRepo(@PathVariable long cusId) throws RecordNotFoundException {
-        this.customerService.deleteCustomerUseMongoRepo(cusId);
-    }
-
 //    @GetMapping
 //    public List<Customer> getAllCustomer(){
 //        return this.customerService.getAllCustomer();
 //    }
 
-    @PostMapping("/create")
-    public Customer createCustomer(@RequestParam String first, String last, String gender, String job, String dob,long customerId) throws ParseException {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss 'GMT'Z");
-        Date date = isoFormat.parse(dob);
-        return customerService.insertCustomer(first, last, gender, job, date,customerId);
-    }
 }

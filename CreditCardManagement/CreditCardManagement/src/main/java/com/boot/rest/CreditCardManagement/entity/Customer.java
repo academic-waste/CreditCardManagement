@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.util.Date;
 @Document
 public class Customer {
+    @Id
     @Field("customer_id")
     private long customerId;
     private String first;

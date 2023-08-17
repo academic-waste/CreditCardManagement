@@ -12,28 +12,11 @@ export class DataAnalysisComponent implements OnInit {
   //category是柱状图，state是饼图
 
   constructor(private dataService: DataService) {}
-  receiveSumData : any[] = [
-    {
-      value:14,
-      name:'hh'
-    },
-    {
-      value:19,
-      name:'hhh'
-    },
-    {
-      value:81,
-      name:'saahh'
-    },
-    {
-      value:11,
-      name:'hdadah'
-    }
-  ]//实际调用api应该不需要这个
+  receiveSumData : any[] = []//实际调用api应该不需要这个
   private lineData: LineData = {xAxis:[],yAxis:[]};
   private pieData: PieData[] = [];
   categoryState: string='';
-  tableName: string = 'State Total';
+  tableName: string = 'Total Transactions By State';
   loading: boolean = false;
 
   //将得到的数据转换为pie的数据
@@ -64,7 +47,7 @@ export class DataAnalysisComponent implements OnInit {
     //choice为0时是饼图，1是柱状图，只用这两种
     //两种情况：仅不同state的total，某个state下的spending category total
     console.log('hhh');
-    this.tableName = 'State Total';
+    this.tableName = 'Total Transactions By State';
     //调用api拿到数据，然后将拿到的数据作为参数传给updateCharts来更新，category，请求接口的类型
     // //if(!choice){
       //还需要更新左边显示的数据
@@ -95,7 +78,9 @@ export class DataAnalysisComponent implements OnInit {
         this.updateCharts(response);
         this.transResponseDataToTableData(response);
         this.receiveSumData=this.pieData;
-        this.tableName = "Spending Category Total"
+        console.log(this.pieData);
+        
+        this.tableName = "Spending Category Total By State"
       },(err)=>{})
     }
   // this.updateCharts(22)
@@ -111,28 +96,46 @@ export class DataAnalysisComponent implements OnInit {
 
   updateCharts(retureData: any){
     const ec = echarts as any;
+    ec.dispose(document.getElementById('lineChart'));
     const lineChart = ec.init(document.getElementById('lineChart'));
 
     const lineChartOption = {
       tooltip: {
-        trigger: 'item'
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
       },
       xAxis: {
         type: 'category',
-        // data: ['aa', 'bb', 'cc', 'dd', 'Fri', 'Sat', 'Sun'],
+        axisTick: {
+          alignWithLabel: true
+        },
+        axisLabel: {
+          interval: 0,//横轴信息全部显示
+            rotate: -45, //倾斜度 -90 至 90 默认为0
+            margin: 15, //刻度标签与轴线之间的距离
+            textStyle: {
+              fontSize: 14, //横轴字体大小
+              color: "#000000",//颜色
+            },
+        },
         data: this.lineData.xAxis,
-        axisLine: { show: false },
-        axisLabel: { show: false },
-        axisTick: { show: false },
-        splitLine: { show: false },
       },
       yAxis: {
         type: 'value'
       },
       series: [{
-        // data: [820, 932, 901, 934, 1290, 1330, 1320],
+        name: 'Direct',
+        type: 'bar',
+        barWidth: '60%',
         data: this.lineData.yAxis,
-        type: 'bar'
       }]
     }
     lineChart.setOption(lineChartOption);
@@ -140,6 +143,7 @@ export class DataAnalysisComponent implements OnInit {
 
   updatePieCharts(returndata: any){
     const ec = echarts as any;
+    ec.dispose(document.getElementById('lineChart'));
     const lineChart = ec.init(document.getElementById('lineChart'));
 
     const lineChartOption = {
@@ -147,12 +151,35 @@ export class DataAnalysisComponent implements OnInit {
         trigger: 'item'
       },
       legend: {
-        data: ['Forest', 'Steppe', 'Desert', 'Wetland']
+        top: '5%',
+        left: 'center'
       },
-      series: [{
-        // data: this.receiveSumData,
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: ['40%', '70%'],
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: '#fff',
+            borderWidth: 2
+          },
+          label: {
+            show: false,
+            position: 'center'
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 40,
+              fontWeight: 'bold'
+            }
+          },
+          labelLine: {
+            show: false
+          },
         data: this.pieData,
-        type: 'pie'
       }]
     }
     lineChart.setOption(lineChartOption);

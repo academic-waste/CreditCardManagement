@@ -25,7 +25,15 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="job">Job</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid!">
-      <input nz-input formControlName="job" id="job" />
+      <nz-select id="job" formControlName="job" nzPlaceHolder="Select job">
+        <nz-option nzValue="Health Visitor" nzLabel="Health Visitor"></nz-option>
+        <nz-option nzValue="Network engineer" nzLabel="Network engineer"></nz-option>
+        <nz-option nzValue="Surgeon" nzLabel="Surgeon"></nz-option>
+        <nz-option nzValue="Video editor" nzLabel="Video editor"></nz-option>
+        <nz-option nzValue="Barrister" nzLabel="Barrister"></nz-option>
+        <nz-option nzValue="Psychiatrist" nzLabel="Psychiatrist"></nz-option>
+      </nz-select>
+      <!-- <input nz-input formControlName="job" id="job" /> -->
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>

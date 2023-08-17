@@ -22,21 +22,42 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+//    @PostMapping("/create")
+//    public ResponseEntity<Object> createCustomer(@RequestBody String first, String last, String gender, String job, String dob, Long customerId) throws ParseException, RecordExistsException {
+//        SimpleDateFormat isoFormat = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss 'GMT'Z");
+//        Date date = isoFormat.parse(dob);
+//        Map<StatusMessages, String> map = new HashMap<>();
+//        try {
+//            this.customerService.insertCustomer(first,last,gender,job,date,customerId);
+//            map.put(StatusMessages.SUCCESS, "Customer inserted successfully");
+//            return ResponseEntity.status(HttpStatus.ACCEPTED).body(map);
+//        } catch (RecordExistsException e) {
+//            map.put(StatusMessages.FAILURE, e.getMessage());
+//            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(map);
+//        }
+//
+//    }
+
     @PostMapping("/create")
-    public ResponseEntity<Object> createCustomer(@RequestParam String first, String last, String gender, String job, String dob, long customerId) throws ParseException, RecordExistsException {
-        SimpleDateFormat isoFormat = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss 'GMT'Z");
-        Date date = isoFormat.parse(dob);
+    public ResponseEntity<Object> createCustomer(@RequestBody Customer customer) throws RecordExistsException {
         Map<StatusMessages, String> map = new HashMap<>();
         try {
-            this.customerService.insertCustomer(first,last,gender,job,date,customerId);
+            this.customerService.insertCustomer(
+                    customer.getFirst(),
+                    customer.getLast(),
+                    customer.getGender(),
+                    customer.getJob(),
+                    customer.getDob(),
+                    customer.getCustomerId()
+            );
             map.put(StatusMessages.SUCCESS, "Customer inserted successfully");
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(map);
         } catch (RecordExistsException e) {
             map.put(StatusMessages.FAILURE, e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(map);
         }
-
     }
+
 
     @DeleteMapping("/{cusId}")
     public ResponseEntity<Object> deleteCustomerById(@PathVariable long cusId){
@@ -67,9 +88,9 @@ public class CustomerController {
 //        return this.customerService.findCustomerById(cusId);
 //    }
 
-//    @GetMapping
-//    public List<Customer> getAllCustomer(){
-//        return this.customerService.getAllCustomer();
-//    }
+    @GetMapping
+    public List<Customer> getAllCustomer(){
+        return this.customerService.getAllCustomer();
+    }
 
 }

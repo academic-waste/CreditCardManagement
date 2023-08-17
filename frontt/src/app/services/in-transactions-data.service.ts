@@ -14,7 +14,7 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getStateSumDate(category:string) : Observable<StateSum[]>{
-    return this.http.get<StateSum[]>(`${this.baseUrl}/transaction/analystByState`)
+    return this.http.get<StateSum[]>(`${this.baseUrl}/transaction/analysisByState`)
   }
 
   getStateCatData(stateName:string): Observable<StateCatgoryData[]>{

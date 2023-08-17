@@ -32,22 +32,30 @@ export class RegisterCardComponent implements OnInit {
     });
   }
 
+  cusId=1000;
+
   // 提交表单数据
   submitForm(): void {
     if (this.validateForm.valid) {
+      this.cusId++;
       this.message.success('Successfully registered！');
       console.log(111,this.validateForm.value);
       const formData = this.validateForm.value;
-      this.inRegisterDataService.sendData(formData).subscribe(
-        (response) => {
-          console.log('Data sent successfully', response);
-          // Handle success
-        },
-        (error) => {
-          console.error('Error sending data', error);
-          // Handle error
-        }
-      );
+      formData["customerId"]=this.cusId;
+      console.log(333,formData);
+      // this.inRegisterDataService.postData(formData).subscribe(
+      //   (response) => {
+      //     console.log('Data sent successfully', response);
+      //     // Handle success
+      //   },
+      //   (error) => {
+      //     console.error('Error sending data', error);
+      //     // Handle error
+      //   }
+      // );
+      this.inRegisterDataService.postData(formData).subscribe(response => {
+        console.log('Response:', response);
+      });
 
       // 模拟后端请求，使用 setTimeout 模拟异步请求
       // setTimeout(() => {
@@ -81,9 +89,9 @@ export class RegisterCardComponent implements OnInit {
   }
 
   // 选择性别
-  genderChange(value: string): void {
-    this.validateForm.get('note')!.setValue(value === 'male' ? 'Hi, man!' : 'Hi, lady!');
-  }
+  // genderChange(value: string): void {
+  //   this.validateForm.get('note')!.setValue(value === 'male' ? 'Hi, man!' : 'Hi, lady!');
+  // }
 
   ngOnInit(): void {
     //表单验证
@@ -91,7 +99,7 @@ export class RegisterCardComponent implements OnInit {
       first: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('[^0-9]*')]],
       last: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('[^0-9]*')]],
       gender: ['', [Validators.required]],
-      job: ['', [Validators.required, Validators.minLength(4), Validators.pattern('[^0-9]*')]],
+      job: ['', [Validators.required]],
       dob: ['', [Validators.required]]
     });
   }
